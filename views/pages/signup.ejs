@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <%- include('../components/header.ejs'); %>
+    </head>
+    <body class="container">
+        <div class="app-container">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h3 class="card-title mb-3">Create Account</h3>
+                  <div class="mb-3">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" placeholder="Enter Full Name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                  </div>
+                  <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                  </div>
+                  <div class="d-grid">
+                      <button type="button" class="btn btn-primary">Create Account</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <footer>
+        <%- include('../components/footer.ejs'); %>
+        </footer>
+
+    </body>
+</html>
+

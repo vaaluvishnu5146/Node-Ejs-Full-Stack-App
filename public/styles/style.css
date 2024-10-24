@@ -1,0 +1,19 @@
+html, body {
+    width: 100%;
+    height: 100vh;
+}
+
+.app-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-page-layout {
+}
+
+.error-image {
+    width: 200px;
+}
