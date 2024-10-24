@@ -35,6 +35,6 @@ server.get('/createPassword', function(req, res) {
     res.render('pages/createPassword');
 });
 
-server.listen(3000, "localhost", () => {
+server.listen(10000, "0.0.0.0", () => {
     console.log('Server started')
-})
+});
