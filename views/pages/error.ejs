@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <%- include('../components/header.ejs'); %>
+    </head>
+    <body class="container">
+        <div class="app-container">
+            <div class="mb-3">
+              <img class="error-image" src="https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png" />
+            </div>
+            <div class="col-6">
+              <h1 class="text-center">Error Occured</h1>
+              <p class="text-center"><%= error %></p>
+            </div>
+        </div>
+        <footer>
+        <%- include('../components/footer.ejs'); %>
+        </footer>
+    </body>
+</html>

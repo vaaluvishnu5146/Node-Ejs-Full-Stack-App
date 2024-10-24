@@ -5,26 +5,28 @@
     </head>
     <body class="container">
         <div class="app-container">
-            <div class="card" style="width: 18rem;">
+            <form action="/signup" method="post">
+              <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h3 class="card-title mb-3">Create Account</h3>
                   <div class="mb-3">
                     <label for="fullName" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="fullName" placeholder="Enter Full Name">
+                    <input type="text" class="form-control" name="name" id="fullName" placeholder="Enter Full Name">
                   </div>
                   <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email">
                   </div>
                   <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
                   </div>
                   <div class="d-grid">
-                      <button type="button" class="btn btn-primary">Create Account</button>
+                      <button type="submit" class="btn btn-primary">Create Account</button>
                   </div>
                 </div>
               </div>
+            </form>
         </div>
         <footer>
         <%- include('../components/footer.ejs'); %>

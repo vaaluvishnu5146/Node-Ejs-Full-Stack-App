@@ -5,25 +5,27 @@
 </head>
 <body class="container">
     <div class="app-container">
+      <form action="/login" method="post">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h3 class="card-title mb-3">Login</h3>
               <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email">
               </div>
               <div class="mb-4">
                 <label for="password" class="form-label">Password</label>
-                <input type="email" class="form-control" id="password" placeholder="Enter Password">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password">
               </div>
               <div class="d-grid mb-2">
-                  <button type="button" class="btn btn-primary">Login</button>
+                  <button type="submit" class="btn btn-primary">Login</button>
               </div>
               <div>
-                <p class="text-center">Forgot Password? <span><a href="./confirmemail.html">Change here</a></span></p>
+                <p class="text-center">Forgot Password? <span><a href="./forgotPassword">Change here</a></span></p>
               </div>
             </div>
-          </div>
+        </div>
+      </form>
     </div>
 
 <footer>
