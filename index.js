@@ -1,6 +1,10 @@
 const express = require("express");
 const { createDbConnection } = require("./db");
 const UserModel = require("./models/user.model");
+const NotesModel = require("./models/notes.model");
+const { fetchAllNotes, fetchNoteWithId } = require("./controllers/notes");
+
+require('dotenv').config();
 
 const server = express();
 
@@ -38,8 +42,32 @@ server.get('/createPassword', function (req, res) {
     res.render('pages/createPassword');
 });
 
-server.get('/dashboard', function (req, res) {
-    res.render('pages/dashboard');
+// Dashboard Notes page
+server.get('/dashboard', async function (req, res) {
+    const notes = await fetchAllNotes();
+    res.render('pages/dashboard', {
+        data: notes
+    });
+});
+
+// Create Notes page
+server.get('/createNotes', function (req, res) {
+    res.render('pages/createNotes');
+});
+
+server.get('/notes/:noteId', async function (request, response) {
+    const {noteId} = request.params;
+    try {
+        const note = await fetchNoteWithId(noteId);
+        response.render('pages/noteDetails', {
+            note
+        });
+    } catch(error) {
+        response.render('pages/error', {
+            error: error.message
+        })
+    }
+
 });
 
 server.get('/error', function (req, res) {
@@ -112,7 +140,23 @@ server.post('/savePassword', (request, response) => {
     }
 });
 
-server.listen(3000, "localhost", () => {
+// saveNoteFlow
+server.post('/saveNote', async (request, response) => {
+    console.log(request.body)
+    try {
+        const newMote = new NotesModel(request.body);
+        const res = await newMote.save();
+        if (res && res._id) {
+            return response.redirect(`${request.headers['origin']}/dashboard`)
+        }
+    } catch (error) {
+        response.render('pages/error', {
+            error: error.message
+        })
+    }
+});
+
+server.listen(process.env.PORT, process.env.HOSTNAME, () => {
     console.log('Server started');
     createDbConnection();
 });

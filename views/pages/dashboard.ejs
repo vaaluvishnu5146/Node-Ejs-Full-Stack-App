@@ -3,9 +3,12 @@
 <head>
   <%- include('../components/header.ejs'); %>
 </head>
-<body class="container">
-    <div class="app-container">
-      <h1>Logged in successfully</h1>
+<body>
+    <%- include('../components/Navbar.ejs'); %>
+      <div class="container row mt-3">
+        <% data.forEach(function(_d){ %>
+          <%- include('../components/note.ejs', {note: _d}); %>
+        <% }); %>
     </div>
 
 <footer>

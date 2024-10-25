@@ -17,3 +17,21 @@ html, body {
 .error-image {
     width: 200px;
 }
+
+.note {
+    min-width: 150px;
+    height: 200px;
+    margin-bottom: 15px;
+    background-image: url('../images/note.png');
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        transform: scale(0.9);
+        animation: transform 1.5s ease-out;
+    }
+}

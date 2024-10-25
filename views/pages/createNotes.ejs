@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../components/header.ejs'); %>
+</head>
+<body>
+    <%- include('../components/Navbar.ejs'); %>
+    <div class="app-container">
+      <form action="/saveNote" method="post">
+        <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <h3 class="card-title mb-3">Create Note</h3>
+            <div class="mb-4">
+              <label for="name" class="form-label">Note Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+            </div>
+            <div class="mb-4">
+              <label for="description" class="form-label">Note Description</label>
+              <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description"></textarea>
+            </div>
+            <div class="mb-4">
+              <label for="category" class="form-label">Note Description</label>
+              <div>
+                <select id="category" name="category">
+                  <option value="office">Office</option>
+                  <option value="home">Home</option>
+                  <option value="personal">Personal</option>
+                  <option value="tech">Tech</option>
+                </select>
+              </div>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Create Note</button>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+
+<footer>
+  <%- include('../components/footer.ejs'); %>
+</footer>
+
+</body>
+</html>
+

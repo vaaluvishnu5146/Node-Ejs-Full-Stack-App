@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../components/header.ejs'); %>
+</head>
+<body>
+    <%- include('../components/Navbar.ejs'); %>
+    <div class="app-container">
+        <h1> <%= note.name %></h1>
+        <p> <%= note.createdAt %></p>
+        <p> <%= note.category %></p>
+        <p> <%= note.description %></p>
+    </div>
+    <footer>
+    <%- include('../components/footer.ejs'); %>
+    </footer>
+</body>
+</html>
+
