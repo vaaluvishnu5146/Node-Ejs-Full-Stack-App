@@ -1,12 +1,18 @@
 const express = require("express");
-const { createDbConnection } = require("./db");
+const cookieParser = require('cookie-parser');
 const UserModel = require("./models/user.model");
 const NotesModel = require("./models/notes.model");
 const { fetchAllNotes, fetchNoteWithId } = require("./controllers/notes");
+const { cookieGuard } = require("./middlewares/cookieMiddleware");
+
 
 require('dotenv').config();
 
+const { createDbConnection } = require("./db");
 const server = express();
+
+// Parse incoming cookies
+server.use(cookieParser());
 
 // Parsing
 server.use(express.urlencoded({extended: true}));
@@ -16,6 +22,12 @@ server.set('view engine', 'ejs');
 
 // configure static folder
 server.use(express.static('public'));
+
+
+// Landing Page
+server.get('/', function (req, res) {
+    res.render('pages/index');
+});
 
 // use res.render to load up an ejs view file Signin page
 server.get('/signin', function (req, res) {
@@ -43,7 +55,7 @@ server.get('/createPassword', function (req, res) {
 });
 
 // Dashboard Notes page
-server.get('/dashboard', async function (req, res) {
+server.get('/dashboard', cookieGuard, async function (req, res) {
     const notes = await fetchAllNotes();
     res.render('pages/dashboard', {
         data: notes
@@ -51,11 +63,11 @@ server.get('/dashboard', async function (req, res) {
 });
 
 // Create Notes page
-server.get('/createNotes', function (req, res) {
+server.get('/createNotes', cookieGuard, function (req, res) {
     res.render('pages/createNotes');
 });
 
-server.get('/notes/:noteId', async function (request, response) {
+server.get('/notes/:noteId', cookieGuard, async function (request, response) {
     const {noteId} = request.params;
     try {
         const note = await fetchNoteWithId(noteId);
@@ -92,13 +104,23 @@ server.post('/signup', async (request, response) => {
 })
 
 // HandleLogin
-server.post('/login', (request, response) => {
+server.post('/login', async (request, response) => {
     const {email, password} = request.body;
-    if (email && password) {
-        return response.redirect(`${request.headers['origin']}/dashboard`)
-    } else {
+    try {
+        const matchedUser = await UserModel.findOne({
+            email
+        });
+        if(matchedUser.password === password) {
+            response.cookie("auth", { email });
+            return response.redirect(`${request.headers['origin']}/dashboard`)
+        } else {
+            response.render('pages/error', {
+                error: "Bad Credentials"
+            })
+        }
+    } catch(error) {
         response.render('pages/error', {
-            error: "Bad Credentials"
+            error: error.message
         })
     }
 })
